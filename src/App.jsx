@@ -7,7 +7,9 @@ function App() {
 
   return (
     <>
-   
+      <div>
+        <h1>Книга контактів</h1>
+      </div>
     </>
   )
 }
