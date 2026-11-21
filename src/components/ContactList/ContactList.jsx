@@ -1,16 +1,12 @@
 import ContactItem from '../ContactItem/ContactItem'
 import { useSelector } from 'react-redux'
+import { selectIsLoading, selectError, selectFilteredContact } from '../../redux/selectors'
 
 function ContactList({ setEditing }) {
-	const contacts = useSelector(state => state.contacts.items)
-	const filter = useSelector(state => state.filter)
-	const isLoading = useSelector(state => state.contacts.isLoading)
-    const error = useSelector(state => state.contacts.error)
+	const contacts = useSelector(selectFilteredContact)
+	const isLoading = useSelector(selectIsLoading)
+    const error = useSelector(selectError)
     
-    
-	const filteredContactsName = contacts.filter(contact =>
-		contact.name.toLowerCase().includes(filter.toLowerCase()),
-	)
 
 	return (
 		<div>
@@ -20,7 +16,7 @@ function ContactList({ setEditing }) {
             {error && <p>{error}</p>}
 			{!isLoading && (
 				<ul>
-					{filteredContactsName.map(contact => {
+					{contacts.map(contact => {
 						return (
 							<ContactItem
 								key={contact.id}
